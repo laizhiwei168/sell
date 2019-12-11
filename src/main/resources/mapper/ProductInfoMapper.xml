@@ -1,0 +1,145 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.cimc.dao.ProductInfoDao">
+  <resultMap id="BaseResultMap" type="com.cimc.po.ProductInfoPo">
+    <constructor>
+      <arg column="product_id" javaType="java.lang.String" jdbcType="VARCHAR" />
+      <arg column="product_name" javaType="java.lang.String" jdbcType="VARCHAR" />
+      <arg column="product_price" javaType="java.math.BigDecimal" jdbcType="DECIMAL" />
+      <arg column="product_stock" javaType="java.lang.Integer" jdbcType="INTEGER" />
+      <arg column="product_description" javaType="java.lang.String" jdbcType="VARCHAR" />
+      <arg column="product_icon" javaType="java.lang.String" jdbcType="VARCHAR" />
+      <arg column="category_type" javaType="java.lang.Integer" jdbcType="INTEGER" />
+      <arg column="create_time" javaType="java.util.Date" jdbcType="TIMESTAMP" />
+      <arg column="update_time" javaType="java.util.Date" jdbcType="TIMESTAMP" />
+    </constructor>
+  </resultMap>
+  
+  
+  <sql id="Base_Column_List">
+   a.*
+   </sql>
+  
+  <sql id="Example_Where_Clause">
+    <!--<where>
+         a.enablestate= 1
+    </where>-->
+  </sql>
+  
+  <select id="findByCount" resultType="int" parameterType="com.cimc.vo.ProductInfoVo" >
+   select 
+   count(1)
+   from 
+   product_info as a 
+   <include refid="Example_Where_Clause" />	
+  </select>
+  
+  <select id="selectByExample" parameterType="com.cimc.vo.ProductInfoVo" resultType="com.cimc.po.ProductInfoPo">
+    select
+    <include refid="Base_Column_List" />
+    FROM product_info as a 
+    <include refid="Example_Where_Clause" />
+     <if test="firstIndex!=null">
+         LIMIT #{firstIndex,jdbcType=INTEGER},#{pageSize,jdbcType=INTEGER}
+     </if>
+  </select>
+  
+  
+  <insert id="insert" parameterType="com.cimc.po.ProductInfoPo">
+    insert into product_info
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="productId != null">
+        product_id,
+      </if>
+      <if test="productName != null">
+        product_name,
+      </if>
+      <if test="productPrice != null">
+        product_price,
+      </if>
+      <if test="productStock != null">
+        product_stock,
+      </if>
+      <if test="productDescription != null">
+        product_description,
+      </if>
+      <if test="productIcon != null">
+        product_icon,
+      </if>
+      <if test="categoryType != null">
+        category_type,
+      </if>
+      <if test="createTime != null">
+        create_time,
+      </if>
+      <if test="updateTime != null">
+        update_time,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="productId != null">
+        #{productId,jdbcType=VARCHAR},
+      </if>
+      <if test="productName != null">
+        #{productName,jdbcType=VARCHAR},
+      </if>
+      <if test="productPrice != null">
+        #{productPrice,jdbcType=DECIMAL},
+      </if>
+      <if test="productStock != null">
+        #{productStock,jdbcType=INTEGER},
+      </if>
+      <if test="productDescription != null">
+        #{productDescription,jdbcType=VARCHAR},
+      </if>
+      <if test="productIcon != null">
+        #{productIcon,jdbcType=VARCHAR},
+      </if>
+      <if test="categoryType != null">
+        #{categoryType,jdbcType=INTEGER},
+      </if>
+      <if test="createTime != null">
+        #{createTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="updateTime != null">
+        #{updateTime,jdbcType=TIMESTAMP},
+      </if>
+    </trim>
+  </insert>
+  <update id="update" parameterType="com.cimc.po.ProductInfoPo">
+    update product_info
+    <set>
+      
+      <if test="productName != null">
+        product_name = #{productName,jdbcType=VARCHAR},
+      </if>
+      <if test="productPrice != null">
+        product_price = #{productPrice,jdbcType=DECIMAL},
+      </if>
+      <if test="productStock != null">
+        product_stock = #{productStock,jdbcType=INTEGER},
+      </if>
+      <if test="productDescription != null">
+        product_description = #{productDescription,jdbcType=VARCHAR},
+      </if>
+      <if test="productIcon != null">
+        product_icon = #{productIcon,jdbcType=VARCHAR},
+      </if>
+      <if test="categoryType != null">
+        category_type = #{categoryType,jdbcType=INTEGER},
+      </if>
+      <if test="createTime != null">
+        create_time = #{createTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="updateTime != null">
+        update_time = #{updateTime,jdbcType=TIMESTAMP},
+      </if>
+    </set>
+    <where>
+    
+        product_id = #{productId,jdbcType=VARCHAR}
+     
+    </where>
+  </update>
+  
+</mapper>

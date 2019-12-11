@@ -1,0 +1,154 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.cimc.dao.OrderMasterDao">
+  <resultMap id="BaseResultMap" type="com.cimc.po.OrderMasterPo">
+    <constructor>
+      <arg column="order_id" javaType="java.lang.String" jdbcType="VARCHAR" />
+      <arg column="order_name" javaType="java.lang.String" jdbcType="VARCHAR" />
+      <arg column="order_phone" javaType="java.lang.String" jdbcType="VARCHAR" />
+      <arg column="order_address" javaType="java.lang.String" jdbcType="VARCHAR" />
+      <arg column="order_openid" javaType="java.lang.String" jdbcType="VARCHAR" />
+      <arg column="order_amount" javaType="java.math.BigDecimal" jdbcType="DECIMAL" />
+      <arg column="order_status" javaType="java.lang.Byte" jdbcType="TINYINT" />
+      <arg column="pay_status" javaType="java.lang.Byte" jdbcType="TINYINT" />
+      <arg column="careate_time" javaType="java.util.Date" jdbcType="TIMESTAMP" />
+      <arg column="update_time" javaType="java.util.Date" jdbcType="TIMESTAMP" />
+    </constructor>
+  </resultMap>
+
+  <sql id="Base_Column_List">
+   a.*
+   </sql>
+
+  <sql id="Example_Where_Clause">
+    <!--<where>
+         a.enablestate= 1
+    </where>-->
+  </sql>
+
+  <select id="findByCount" resultType="int" parameterType="com.cimc.vo.OrderMasterVo" >
+    select
+    count(1)
+    from
+    order_master as a
+    <include refid="Example_Where_Clause" />
+  </select>
+
+  <select id="selectByExample" parameterType="com.cimc.vo.OrderMasterVo" resultType="com.cimc.po.OrderMasterPo">
+    select
+    <include refid="Base_Column_List" />
+    FROM order_master as a
+    <include refid="Example_Where_Clause" />
+    <if test="firstIndex!=null">
+      LIMIT #{firstIndex,jdbcType=INTEGER},#{pageSize,jdbcType=INTEGER}
+    </if>
+  </select>
+
+
+  <insert id="insert" parameterType="com.cimc.po.OrderMasterPo">
+    insert into order_master
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="orderId != null">
+        order_id,
+      </if>
+      <if test="orderName != null">
+        order_name,
+      </if>
+      <if test="orderPhone != null">
+        order_phone,
+      </if>
+      <if test="orderAddress != null">
+        order_address,
+      </if>
+      <if test="orderOpenid != null">
+        order_openid,
+      </if>
+      <if test="orderAmount != null">
+        order_amount,
+      </if>
+      <if test="orderStatus != null">
+        order_status,
+      </if>
+      <if test="payStatus != null">
+        pay_status,
+      </if>
+      <if test="careateTime != null">
+        careate_time,
+      </if>
+      <if test="updateTime != null">
+        update_time,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="orderId != null">
+        #{orderId,jdbcType=VARCHAR},
+      </if>
+      <if test="orderName != null">
+        #{orderName,jdbcType=VARCHAR},
+      </if>
+      <if test="orderPhone != null">
+        #{orderPhone,jdbcType=VARCHAR},
+      </if>
+      <if test="orderAddress != null">
+        #{orderAddress,jdbcType=VARCHAR},
+      </if>
+      <if test="orderOpenid != null">
+        #{orderOpenid,jdbcType=VARCHAR},
+      </if>
+      <if test="orderAmount != null">
+        #{orderAmount,jdbcType=DECIMAL},
+      </if>
+      <if test="orderStatus != null">
+        #{orderStatus,jdbcType=TINYINT},
+      </if>
+      <if test="payStatus != null">
+        #{payStatus,jdbcType=TINYINT},
+      </if>
+      <if test="careateTime != null">
+        #{careateTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="updateTime != null">
+        #{updateTime,jdbcType=TIMESTAMP},
+      </if>
+    </trim>
+  </insert>
+  <update id="update" parameterType="com.cimc.po.OrderMasterPo">
+    update order_master
+    <set>
+      
+      <if test="orderName != null">
+        order_name = #{orderName,jdbcType=VARCHAR},
+      </if>
+      <if test="orderPhone != null">
+        order_phone = #{orderPhone,jdbcType=VARCHAR},
+      </if>
+      <if test="orderAddress != null">
+        order_address = #{orderAddress,jdbcType=VARCHAR},
+      </if>
+      <if test="orderOpenid != null">
+        order_openid = #{orderOpenid,jdbcType=VARCHAR},
+      </if>
+      <if test="orderAmount != null">
+        order_amount = #{orderAmount,jdbcType=DECIMAL},
+      </if>
+      <if test="orderStatus != null">
+        order_status = #{orderStatus,jdbcType=TINYINT},
+      </if>
+      <if test="payStatus != null">
+        pay_status = #{payStatus,jdbcType=TINYINT},
+      </if>
+      <if test="careateTime != null">
+        careate_time = #{careateTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="updateTime != null">
+        update_time = #{updateTime,jdbcType=TIMESTAMP},
+      </if>
+    </set>
+    <where>
+      
+        order_id = #{orderId,jdbcType=VARCHAR}
+      
+    </where>
+  </update>
+
+</mapper>
