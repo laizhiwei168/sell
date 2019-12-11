@@ -33,6 +33,12 @@ public class SellerController {
     @Autowired
     private RedisUtil redisUtil;
 
+    @GetMapping("select")
+    public void select(){
+        log.info("查询卖家信息");
+    }
+
+
     @GetMapping("/login")
     public void login(@RequestParam("openid") String openid, HttpServletResponse response, Map<String,Object> map){
         // 1.openid去和数据库里的数据匹配
